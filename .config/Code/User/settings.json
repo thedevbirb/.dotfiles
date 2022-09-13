@@ -1,0 +1,59 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "tabnine.experimentalAutoImports": true,
+    "workbench.iconTheme": "material-icon-theme",
+
+    // vim exntension settings
+    "vim.leader": "<space>",
+    "vim.changeWordIncludesWhitespace": true,
+    "vim.useSystemClipboard": true,
+    "vim.smartRelativeLine": true,
+
+    //
+    "vim.normalModeKeyBindings": [
+        {
+            // insert new line below without moving and entering insert mode
+            "before": ["leader", "o"],
+            "after": ["o", "<esc>", "k"],
+            "when": ["editorTextFocus && vim.active"],
+        },
+        {
+            // insert new line above without moving and entering insert mode
+            "before": ["leader", "O"],
+            "after": ["O", "<esc>", "j"],
+            "when": ["editorTextFocus && vim.active"],
+        },
+        {
+            // select all (similar to the plain <ctrl>a but inside vim)
+            "before": ["leader", "a"],
+            "after": ["g", "g", "V", "G"],
+            "when": ["editorTextFocus && vim.active"],
+        },
+    ],
+
+    // does not work, however it might be useful to look at the syntax. Use <C-[>!
+    // "vim.insertModeKeyBindings": [
+    //     {
+    //         // make <C-g> as esc, like in evil-mode
+    //         "before": ["<C-g>"],
+    //         "commands": ["extension.vim_escape"],
+    //         "when": "editorTextFocus && vim.active && !inDebugRepl"
+    //     },
+    // ],
+
+    // "vim.visualModeKeyBindings": [
+    //     {
+    //         // make <C-g> as esc, like in evil-mode
+    //         "before": ["<C-g>"],
+    //         "commands": ["extension.vim_escape"],
+    //         "when": "editorTextFocus && vim.active && !inDebugRepl"
+    //     },
+    // ],
+
+    // use prettier to format vscode
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "hardhat.telemetry": false
+} 

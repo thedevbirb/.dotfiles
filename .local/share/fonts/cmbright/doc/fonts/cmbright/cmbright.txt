@@ -1,0 +1,35 @@
+************************************************************
+*                                                          *
+*      The COMPUTER MODERN BRIGHT family of fonts          *
+*                                                          *
+*   There will be no more *basic* changes to the fonts.    *
+*   Extensions and bug fixes, however, may be expected.    *
+*                                                          *
+************************************************************
+                                              Walter Schmidt 
+                                         w-a-schmidt@gmx.net
+
+
+`Computer Modern Bright' is a family of sans serif fonts for
+TeX and LaTeX, based on Donald Knuth's `Computer Modern'.
+It comprises OT1, T1 and TS1 encoded text fonts of various
+shapes as well as all the fonts necessary for mathematical
+typesetting, including the AMS symbols.  CM Bright is
+accompanied by a matching family of monospaced fonts,
+`Computer Modern Typewriter Light'.
+
+This distribution includes the fonts in the Metafont format
+in the directory fonts/source/public/cmbright and the font
+metrics in the directory fomnts/tfm/public/cmbright,
+
+The CM Bright and CM typewriter Light fonts are available in
+the Type1 (Postscript) format, too.  
+See <http://www.micropress-inc.com/fonts>.
+
+Use of the typefaces with LaTeX is supported through the
+macro package cmbright.sty.  Its documentation
+(doc/latex/cmbright/cmbright.pdf) constitutes also a font 
+sample.
+
+
+%% finis

@@ -1,0 +1,209 @@
+************************************************************
+*                                                          *
+*      The COMPUTER MODERN BRIGHT family of fonts          *
+*                                                          *
+*   fonts:       v1.0g  2002-05-25                         *
+*   macros       v8.1   2005-04-13                         *
+*                                                          *
+*   There will be no more *basic* changes to the fonts.    *
+*   Extensions and bug fixes may be expected still.        *
+*                                                          *
+************************************************************
+                                              Walter Schmidt 
+                                      w-a-schmidt(at)gmx.net
+
+
+`Computer Modern Bright' is a family of sans serif fonts for
+TeX and LaTeX, based on Donald Knuth's `Computer Modern'.
+It comprises OT1, T1 and TS1 encoded text fonts of various
+shapes as well as all the fonts necessary for mathematical
+typesetting, including the AMS symbols.  CM Bright is
+accompanied by a matching family of monospaced fonts,
+`Computer Modern Typewriter Light'.
+
+This distribution comprises
+
+* the fonts in the Metafont format,
+
+* the TeX font metrics,
+
+* the LaTeX macro package cmbright.sty and the related font
+  definition files
+
+The CM Bright fonts are available in the Type1 format, too.
+See <http://www.micropress-inc.com/fonts/brmath/brmain.htm>.
+
+To install, move all files to the corresponding directories
+of your TeX system.  In case yor TeX system does not support
+the use of fonts in the obsolete Metafont format, omit the
+directories fonts/source and doc/fonts.
+
+Documentation regarding the use of the fonts can be found in
+the document cmbright.pdf.
+
+Additional documentation regarding the license of the 
+Metafont sources of the CM-Bright fonts can be found in the 
+directory texmf/doc/fonts/cmbright.
+
+
+License
+=======
+The MF sources of the CM Bright and CM Typewriter Light 
+fonts are subject to the LPPL; see the files in the 
+directory doc/fonts/cmbright.
+
+The LaTeX macros to use the CM Bright and CM Typewriter Light 
+fonts are separately(!) subject to the LPPL, too; see the 
+notice in the file source/latex/cmbrght/cmbright.dtx.
+
+
+History
+=======
+*** 2005-04-13**
+
+    The fonts are now declared as continuously scalable, so
+    that arbitrary sizes are supported.  
+    The obsolete hacks regarding the use of \oldstylenums 
+    and \textregistered have been abolished.  
+    When the package is loaded with the option 
+    [slantedGreek], all upright uppercase Greek letters are
+    made available, too
+    Bug fix re. default definition of \Gamma.
+    The package will fix the (La)TeX logos to suit CM-Bright.
+    The package documentation now acts as a font sample,
+    too.
+    Source file cmbright.fdd abolished; all sources are in 
+    the .dtx file now. 
+    Distribution rearranged \`a la TDS.
+
+*** 2002-05-25 ***
+
+    Fixed tbsymb.mf and all TFM's of the TC Bright fonts,
+    which had wong \fontdimen's; notice that the the font 
+    shapes are unchanged!
+    Documentation (cmbright.dtx) cleaned up.
+    
+*** 2002-05-11 ***
+
+    fixed cmbr8.tfm cmbr9.tfm cmbrmb10.tfm cmbrmi8.tfm
+    cmbrmi9.tfm cmbrsl8.tfm cmbrsl9.tfm;
+    TFMs are no longer mentioned in manifest.txt
+
+*** 2000-06-30 ***
+
+    cmbright v7.1:  Bug fix.  Loading amsfonts.sty with the
+    option [psamsfonts] would use the `roman' AMS fonts instead
+    of the `Bright' ones.
+    Improved documentation.
+    
+*** 2000-02-09 ***
+
+   fonts v1.0f: Fixed all Euro symbols.
+    
+*** 1999-05-12 ***
+
+   documentation revisited and reorganized
+   
+*** 1999-03-28 ***
+
+   cmbright.sty v6.9:  new option [slantedGreek];
+   
+*** 1998-12-11 ***
+
+   cmbright.sty v6.7:  Fixed the math font setup, so that
+   \mathbold acts on lowercase greek, too.
+   fonts v1.0e: improved Euro symbol (the metrics remain
+   unchanged!)
+   
+*** 1998-02-02 ***
+
+   fd files v7.3: font sizes 29.86 and 35.83 pt suppported
+
+*** 1998-01-19 ***
+
+   Fixed cmbright.ins to prevent problems with Unix (teTeX):
+   Do not generate uppercase filenames automatically.
+   cmbright.ins now TDS-enabled.  
+   Added oinst.ins for LaTeX  < Dec.1996.
+
+*** 1997-09-11 ***
+
+   cmbright.sty v6.6: added \relax after \ProcessOptions,
+   removed spurious spaces in font definitions
+
+   fd files v7.2: forced \hyphenchar\font45 in OT1 fonts,
+   removed spurious spaces in font definitions
+
+   included the new installation script, which was
+   erroneously lacking in the previous distribution :-(
+   
+*** 1997-06-03 ***
+
+   fixed a bug in the installation script:  the fd files are
+   now generated with mixed-case names if necessary (i.e.
+   when running an obsolete LaTeX release on Unix)
+
+   fonts, v1.0d: corrected height of arithmetic symbols in
+   T1/TS1 fonts;
+
+*** 1997-05-26 *** 
+
+   Fonts, v1.0c:  changed lowercase hachek accent in order
+   to avoid METAFONT errors occurring with certain MF modes;
+   fixed `root' symbol and big circles in TS1 fonts;
+   corrected rule_width# in semibold fonts, which had been
+   larger than it is in the bx fonts;
+
+*** 1997/05/22 ***
+
+   fd files v7.0: lowercase filenames
+
+   fonts v1.0b:  br17pt.mf fixed (o#, apex_o#)
+
+   cmbright.sty v6.4:  minor fixes
+
+   enhanced documentation
+
+*** 1996/11/20 ***
+
+   Documentation update only,  e-mail address added.
+
+*** 1996/07/02 ***
+
+   cmbright.sty, v6.2:  The code for selecting font size and
+   \baselineskip has been basically changed.  The default
+   font sizes defined in the class file will no longer be
+   changed.  The size macros like \normalsize will no longer
+   be redefined.  Same font sizes will always get the same
+   leading:
+  
+   size    \baselineskip
+    8pt    10.00pt
+    9pt    11.25pt
+   10pt    12.50pt
+   11pt    13.70pt
+   12pt    15.00pt
+
+   A new option [standard-baselineskips] enables you to
+   suppress the enlarged \baseselineskip values.
+
+   The commands \textregistered, \pounds, \textsterling and
+   \mathsterling have been made working; they will use the
+   roman text font.
+
+   font definition files, v6.0:  In all .fd files octal
+   numbers have been changed to decimal ones, in order to
+   avoid conflicts with possibly active quote characters.
+
+   fonts, v1.0:  erroneous comments fixed
+
+*** 1996/05/02 ***
+
+   fonts:                    version 1.0
+   font definition files:            5.0
+   LaTeX package `cmbright':         5.0
+
+   The first `final' release, including the AMS fonts.
+
+
+%% finis
