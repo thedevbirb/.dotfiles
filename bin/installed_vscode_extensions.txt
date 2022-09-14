@@ -1,0 +1,11 @@
+dbaeumer.vscode-eslint
+eamodio.gitlens
+esbenp.prettier-vscode
+JuanBlanco.solidity
+meganrogge.template-string-converter
+naumovs.color-highlight
+NomicFoundation.hardhat-solidity
+PKief.material-icon-theme
+TabNine.tabnine-vscode
+vscode-org-mode.org-mode
+vscodevim.vim
