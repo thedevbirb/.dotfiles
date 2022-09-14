@@ -10,18 +10,20 @@ echo ""
 echo "Are you sure you want to proceed? [y\n]"
 read opt
 
+dirpath=~/.dotfiles/misc_txt_files
+
 write_stuff() {
   # first clean the folder
-  rm -rf ~/.dotfiles/misc_txt_files/*
+  rm -rf ${dirpath}/*
   
   # list installed and removed programs etc
-  dnf history | grep -E 'install|\bremove\b' >> installed_programs_fedora.txt
+  dnf history | grep -E 'install|\bremove\b' >> ${dirpath}/installed_programs_fedora.txt
   # list installed extension vscode
-  code --list-extensions >> installed_vscode_extensions.txt
+  code --list-extensions >> ${dirpath}/installed_vscode_extensions.txt
 }
 
 if [ $opt == "y" ]; then
-  echo "Wiping ~/.dotfiles/misc_txt_files and writing stuff"
+  echo "Wiping ${dirpath} and writing stuff"
   write_stuff
   echo "Write a message for your commit"
   read message 
