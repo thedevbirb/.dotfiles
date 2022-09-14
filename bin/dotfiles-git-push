@@ -17,9 +17,9 @@ write_stuff() {
   rm -rf ${dirpath}/*
   
   # list installed and removed programs etc
-  dnf history | grep -E 'install|\bremove\b' >> ${dirpath}/installed_programs_fedora.txt
+  dnf history | grep -E 'install|\bremove\b' >> ${dirpath}/fedora_programs_installed.txt
   # list installed extension vscode
-  code --list-extensions >> ${dirpath}/installed_vscode_extensions.txt
+  code --list-extensions >> ${dirpath}/vscode_extensions_installed.txt
 }
 
 if [ $opt == "y" ]; then
