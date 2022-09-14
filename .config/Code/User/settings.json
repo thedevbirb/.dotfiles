@@ -1,5 +1,4 @@
 {
-    "workbench.colorTheme": "Default Dark+",
     "tabnine.experimentalAutoImports": true,
     "workbench.iconTheme": "material-icon-theme",
 
@@ -29,6 +28,21 @@
             "after": ["g", "g", "V", "G"],
             "when": ["editorTextFocus && vim.active"],
         },
+            // switch tab with <S-h> and <S-l> where <S> is "Shift". Does not work 
+            // in non-editor "buffers"
+        {
+            "before": ["L"],
+            "commands": ["workbench.action.nextEditor"],
+            "when": ["vim.active"],
+        },
+        {
+            "before": ["H"],
+            "commands": ["workbench.action.previousEditor"],
+            "when": ["vim.active"],
+        }
+
+
+
     ],
 
     // does not work, however it might be useful to look at the syntax. Use <C-[>!

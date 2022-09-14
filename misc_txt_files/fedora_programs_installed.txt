@@ -1,3 +1,5 @@
+    49 | remove nitrogen                                                                                                                                               | 2022-09-14 14:27 | Removed        |    2   
+    48 | install nitrogen                                                                                                                                              | 2022-09-14 14:22 | Install        |    2   
     47 | install gh                                                                                                                                                    | 2022-09-13 17:01 | Install        |    1   
     46 | install stow                                                                                                                                                  | 2022-09-12 16:48 | Install        |    1   
     45 | install xinput                                                                                                                                                | 2022-09-11 21:58 | Install        |    1   
