@@ -34,6 +34,9 @@
 ;; ensure packages by default
 (setq use-package-always-ensure t)
 
+;; load symlinked file without asking confirmation
+(setq vc-follow-symlinks t)
+
 
 (require 'org)
 (org-babel-load-file "~/.config/emacs/Emacs.org")

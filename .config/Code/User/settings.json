@@ -64,10 +64,19 @@
     //     },
     // ],
 
+    //
+    // NEOVIM CONFIGURATION
+    //
+    
+    
+    
     // use prettier to format vscode
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "security.workspace.trust.untrustedFiles": "open",
-    "hardhat.telemetry": false
+    "hardhat.telemetry": false,
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "vscode-neovim.mouseSelectionStartVisualMode": true,
+    "editor.lineNumbers": "relative"
 } 

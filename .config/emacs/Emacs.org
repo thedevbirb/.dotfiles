@@ -230,6 +230,10 @@ Set frame transparency and maximize windows by default.
 
   (message "General configuration - UI... loaded")
 #+end_src
+Replace 'yes' or 'no' with 'y' and 'n'.
+#+begin_src emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
 
 
 ** Theme
@@ -822,6 +826,7 @@ More info on the official github page.
 #+begin_src emacs-lisp
   (message "Completion system... loaded")
 #+end_src
+
 
 * Jumping with Avy (empty, non-essential but cool!)
 
