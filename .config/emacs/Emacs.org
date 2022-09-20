@@ -424,7 +424,7 @@ Recall that leader key is usually =<SPC>=.
   (use-package rainbow-delimiters
     :hook
     ; (org-mode . rainbow-delimiters-mode)
-    (text-mode . rainbow-delimiters-mode)
+    ; (text-mode . rainbow-delimiters-mode)
     (prog-mode . rainbow-delimiters-mode))
 #+end_src
 

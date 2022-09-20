@@ -1,3 +1,4 @@
+    53 | -y install --disablerepo=* /tmp/akmods.vUfvnQej/results/kmod-wl-5.19.9-200.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                         | 2022-09-20 11:38 | Install        |    1 EE
     51 | -y install --disablerepo=* /tmp/akmods.67jh5Rfu/results/kmod-wl-5.19.8-200.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                         | 2022-09-16 09:57 | Install        |    1 EE
     49 | remove nitrogen                                                                                                                                                | 2022-09-14 14:27 | Removed        |    2   
     48 | install nitrogen                                                                                                                                               | 2022-09-14 14:22 | Install        |    2   

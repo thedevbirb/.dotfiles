@@ -10,7 +10,7 @@
 ;; startup performance
 
 ;; The default is 800 kilobytes.  Measured in bytes.
-(setq gc-cons-threshold (* 100 1000 1000))
+; (setq gc-cons-threshold (* 100 1000 1000))
 
 (add-hook 'emacs-startup-hook
           (lambda ()
