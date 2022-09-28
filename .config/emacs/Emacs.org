@@ -977,6 +977,9 @@ My personal org configation, as in old config.el file.
     (org-hide-emphasis-markers t)
     (org-ellipsis " ▾")
     (org-confirm-babel-evaluate nil)
+
+    ;; default image size if no other value is provided with #+attr_org: :width N
+    (org-image-actual-width '(600))
     :config
     ;; Set faces for heading levels
     (dolist (face '((org-level-1 . 1.3)
@@ -1043,6 +1046,8 @@ My personal org configation, as in old config.el file.
   (add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
   (add-to-list 'org-structure-template-alist '("html" . "src html"))
   (add-to-list 'org-structure-template-alist '("sol" . "src solidity"))
+  (add-to-list 'org-structure-template-alist '("txt" . "src text"))
+  (add-to-list 'org-structure-template-alist '("rs" . "src rust"))
 
   ;; (use-package org-bullets
   ;;   :after org
@@ -1274,6 +1279,12 @@ Configure TypeScript and JavaScript language modes. Support for React included. 
   (use-package solidity-mode
     :mode "\\.sol\\'")
 #+end_src
+
+*** Rust
+#+begin_src emacs-lisp
+  (use-package rustic)
+#+end_src
+
 *** C/C++ (empty)
 #+begin_src emacs-lisp
 
