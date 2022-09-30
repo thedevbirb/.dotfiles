@@ -168,13 +168,6 @@ Some tips can be found here:
 #+end_src
 
 
-** Enable keychord bing with use-package (empty)
-If you type fast some keys they'll wake a chord. Configuration for use-package.
-#+begin_src emacs-lisp
-  ;; (use-package use-package-chords
-  ;;   :config (key-chord-mode 1))
-#+end_src
-
 
 
 * General Configuration
@@ -255,33 +248,6 @@ Gruvbox FTW. Honorable mention to =doom-palenight=.
   (set-face-attribute 'fixed-pitch nil :font "Monospace" :height 110)
 #+end_src
 
-*** Enable proper Unicode glyph support
-No idea what this means but hey.
-#+begin_src emacs-lisp
-  (defun dw/replace-unicode-font-mapping (block-name old-font new-font)
-    (let* ((block-idx (cl-position-if
-                       (lambda (i) (string-equal (car i) block-name))
-                       unicode-fonts-block-font-mapping))
-           (block-fonts (cadr (nth block-idx unicode-fonts-block-font-mapping)))
-           (updated-block (cl-substitute new-font old-font block-fonts :test 'string-equal)))
-      (setf (cdr (nth block-idx unicode-fonts-block-font-mapping))
-            `(,updated-block))))
-
-  (use-package unicode-fonts
-    :disabled
-    :custom
-    (unicode-fonts-skip-font-groups '(low-quality-glyphs))
-    :config
-    ;; Fix the font mappings to use the right emoji font
-    (mapcar
-     (lambda (block-name)
-       (dw/replace-unicode-font-mapping block-name "Apple Color Emoji" "Noto Color Emoji"))
-     '("Dingbats"
-       "Emoticons"
-       "Miscellaneous Symbols and Pictographs"
-       "Transport and Map Symbols"))
-    (unicode-fonts-setup))
-#+end_src
 
 *** Emojis in buffers
 #+begin_src emacs-lisp
@@ -375,17 +341,6 @@ Prettiy the modeline with [[https://github.com/Malabarba/smart-mode-line/][smart
 #+end_src
 
 
-** Auto-Saving changed files
-#+begin_src emacs-lisp
-  (use-package super-save
-    :disabled ;; atm I find it really annoying and slows down my workflow
-    :defer 1
-    :diminish super-save-mode
-    :config
-    (super-save-mode +1)
-    (setq super-save-auto-save-when-idle t))
-#+end_src
-
 
 ** Auto-Reverting Changed Files
 #+begin_src emacs-lisp
@@ -429,16 +384,6 @@ Recall that leader key is usually =<SPC>=.
 #+end_src
 
 
-** Displaying World Time (empty)
-
-
-** Pinentry (empty)
-
-
-** TRAMP (empty)
-
-
-** Emacs as External Editor (empty)
 
 
 * Editing configurations
@@ -469,51 +414,6 @@ Super friggin' useful
   (use-package ws-butler
     :hook ((text-mode . ws-butler-mode)
            (prog-mode . ws-butler-mode)))
-#+end_src
-
-
-** Use Parinfer for Lispy languages (empty)
-
-
-** Origami.el for folding code (empty)
-
-
-
-* Configuration files
-** Configuration file management with dotcrafter.el (empty)
-
-
-** Helpers
-#+begin_src emacs-lisp
-  (defun dw/org-file-jump-to-heading (org-file heading-title)
-    (interactive)
-    (find-file (expand-file-name org-file))
-    (goto-char (point-min))
-    (search-forward (concat "* " heading-title))
-    (org-overview)
-    (org-reveal)
-    (org-show-subtree)
-    (forward-line))
-
-  (defun dw/org-file-show-headings (org-file)
-    (interactive)
-    (find-file (expand-file-name org-file))
-    (counsel-org-goto)
-    (org-overview)
-    (org-reveal)
-    (org-show-subtree)
-    (forward-line))
-#+end_src
-
-
-** Bindings (empty)
-
-
-** Stateful Keymap with Hydra (maybe critical)
-Definitely keep an eye on how it works on Github
-#+begin_src emacs-lisp
-  (use-package hydra
-    :defer 1)
 #+end_src
 
 
@@ -550,31 +450,6 @@ Note: the first time you load your configuration on a new machine, you'll need t
 #+end_src
 
 
-** Syntax Checking with Flycheck
-Note all languages are supported thought. This is a list:
-
-- Cadence
-- Clojure
-- C/C++/Objective C
-- D
-- Elixir
-- Emacs Lisp
-- Julia
-- Haskell
-- Ledger
-- Mercury
-- OCaml
-- PHP
-- Python
-- Rust
-- Shell scripts
-
-However, it is possible to add more syntax checkers. See manual.
-#+begin_src emacs-lisp
-(use-package flycheck
-  :init (global-flycheck-mode))
-#+end_src
-
 
 ** Completions with Vertico
 Vertico display a VERTical Interactive COmpletion, the one you see when typing =M-x=. It is a minimal alternative to =ivy= which betters suit Emacs.
@@ -605,23 +480,6 @@ Vertico display a VERTical Interactive COmpletion, the one you see when typing =
     (vertico-mode))
 #+end_src
 
-
-** Completions with Company (TEST, currently disabled)
-A completion front-end. I.e., it shows completions with pop-ups (frontend)
-#+begin_src emacs-lisp
-  ;; (use-package company
-  ;;   :hook (after-init . global-company-mode)
-  ;;   :custom (setq company-backends '((company-capf company-dabbrev-code))))
-
-  ;; (use-package company-box
-  ;;   :after company
-  ;;   :hook (company-mode . company-box-mode))
-
-  ;; (use-package company-quickhelp
-  ;;   :disabled
-  ;;   :after company
-  ;;   :config (company-quickhelp-mode))
-#+end_src
 
 
 ** Completions in regions with Corfu
@@ -789,49 +647,11 @@ Marginalia provides helpful annotation for various types of minibuffer completio
 #+end_src
 
 
-** Completion actions with Embark
-Embark makes it easy to choose a command to run based on what is near point, both during a minibuffer completion session (in a way familiar to Helm or Counsel users) and in normal buffers.
-You can think of embark-act as a keyboard-based version of a right-click contextual menu.
-More info on the official github page.
-#+begin_src emacs-lisp
-  (use-package embark
-    :bind (("C-S-a" . embark-act)
-           :map minibuffer-local-map
-           ("C-d" . embark-act))
-    :config
-
-    ;; Show Embark actions via which-key
-    (setq embark-action-indicator
-          (lambda (map)
-            (which-key--show-keymap "Embark" map nil nil 'no-paging)
-            #'which-key--hide-popup-ignore-command)
-          embark-become-indicator embark-action-indicator))
-
-  ;; (use-package embark-consult
-  ;;   :straight '(embark-consult :host github
-  ;;                              :repo "oantolin/embark"
-  ;;                              :files ("embark-consult.el"))
-  ;;   :after (embark consult)
-  ;;   :demand t
-  ;;   :hook
-  ;;   (embark-collect-mode . embark-consult-preview-minor-mode))
-#+end_src
-
-
-** Launching apps
-#+begin_src emacs-lisp
-  ; (use-package app-launcher)
-#+end_src
 
 #+begin_src emacs-lisp
   (message "Completion system... loaded")
 #+end_src
 
-
-* Jumping with Avy (empty, non-essential but cool!)
-
-
-* Buffer management with Bufler (empty)
 
 
 * Window management
@@ -877,14 +697,6 @@ Emacs' default buffer placement algorithm is pretty disruptive if you like setti
 (setq even-window-sizes nil)
 #+end_src
 
-
-
-* Expand Region (empty)
-This module is absolutely necessary for working inside of Emacs Lisp files, especially when trying to some parent of an expression (like a setq). Makes tweaking Org agenda views much less annoying.
-
-
-
-* Credential management (empty)
 
 
 * File Browsing
@@ -939,21 +751,6 @@ If you need some guidelines on the available keybindings (considering Evil), che
   (message "File browsing... loaded")
 #+end_src
 
-** Opening Files Externally (empty, a bit advanced)
-
-
-* PDF
-** PDF reader with pdf-tools
-#+begin_src emacs-lisp
-  (use-package pdf-tools
-  :mode
-  (("\\.pdf$" . pdf-view-mode))
-
-  :config
-  ;; 'pdf-tools' requires a server 'epdfinfo' to run against. This command
-  ;; builds such server in order to pdf-tools in all current and future pdf-buffers.
-  (pdf-tools-install))
-#+end_src
 
 
 * Org Mode
@@ -993,7 +790,7 @@ My personal org configation, as in old config.el file.
       (set-face-attribute (car face) nil :font "CMU Bright" :weight 'regular :height (cdr face)))
 
     ;; Set the variable pitch face
-    (set-face-attribute 'variable-pitch nil :font "CMU Bright" :height 140 :weight 'regular)
+   (set-face-attribute 'variable-pitch nil :font "CMU Bright" :height 140 :weight 'regular)
 
     ;; Set the fixed pitch face
     (set-face-attribute 'fixed-pitch nil :font "Monospace" :height 110)
@@ -1048,13 +845,14 @@ My personal org configation, as in old config.el file.
   (add-to-list 'org-structure-template-alist '("sol" . "src solidity"))
   (add-to-list 'org-structure-template-alist '("txt" . "src text"))
   (add-to-list 'org-structure-template-alist '("rs" . "src rust"))
+  (add-to-list 'org-structure-template-alist '("rust" . "src rust"))
 
   ;; (use-package org-bullets
   ;;   :after org
   ;;   :hook (org-mode . org-bullets-mode))
 #+end_src
 
-*** Center Org bufferk
+*** Center Org buffer
 We use visual-fill-column to center org-mode buffers for a more pleasing writing experience as it centers the contents of the buffer horizontally to seem more like you are editing a document. This is really a matter of personal preference so you can remove the block below if you don’t like the behavior.
 
 visual-fill-column-mode is a small Emacs minor mode that mimics the effect of fill-column in visual-line-mode. Instead of wrapping lines at the window edge, which is the standard behaviour of visual-line-mode, it wraps lines at fill-column (or visual-fill-column-width, if set). That is, it turns the view on the left into the view on the right, without changing the contents of the file:
@@ -1085,33 +883,6 @@ Daviwl adds way more stuff I do not understand. However, 'evil-org' is interesti
 * Development
 Configuration for various programming languages and dev tools I use.
 
-** Git
-*** magit
-https://magit.vc/manual/magit/
-#+begin_src emacs-lisp
-  (use-package magit
-    :bind ("C-M-;" . magit-status)
-    :commands (magit-status magit-get-current-branch)
-    :custom
-    (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
-
-  ;; turn them on when needed. atm I don't use git
-  ;; (dw/leader-key-def
-  ;;   "g"   '(:ignore t :which-key "git")
-  ;;   "gs"  'magit-status
-  ;;   "gd"  'magit-diff-unstaged
-  ;;   "gc"  'magit-branch-or-checkout
-  ;;   "gl"   '(:ignore t :which-key "log")
-  ;;   "glc" 'magit-log-current
-  ;;   "glf" 'magit-log-buffer-file
-  ;;   "gb"  'magit-branch
-  ;;   "gP"  'magit-push-current
-  ;;   "gp"  'magit-pull-branch
-  ;;   "gf"  'magit-fetch
-  ;;   "gF"  'magit-fetch-all
-  ;;   "gr"  'magit-rebase)
-#+end_src
-
 
 
 ** Productivity
@@ -1121,19 +892,19 @@ https://magit.vc/manual/magit/
     :hook (prog-mode . smartparens-mode))
 #+end_src
 
-**** Fuzzy finder with affe
+*** Fuzzy finder with affe
 #+begin_src emacs-lisp
-  (use-package affe)
+  ;; (use-package affe)
 
-  (defun lf/fuzzy-find-in-project ()
-    (interactive)
-      "combines `project-dired' and `affe-find'"
-    (project-dired)
-    (affe-find))
+  ;; (defun lf/fuzzy-find-in-project ()
+  ;;   (interactive)
+  ;;     "combines `project-dired' and `affe-find'"
+  ;;   (project-dired)
+  ;;   (affe-find))
 
-  (dw/leader-key-def
-    ;; fuzzy find
-    "ff" 'lf/fuzzy-find-in-project)
+  ;; (dw/leader-key-def
+  ;;   ;; fuzzy find
+  ;;   "ff" 'lf/fuzzy-find-in-project)
 #+end_src
 
 
@@ -1155,80 +926,12 @@ By adding the code below to your init, you'll automatically get tree-sitter synt
 #+end_src
 
 
-** Languages
-*** Language Server Support (To redo completely)
-We will use =lsp-mode= instead of =eglot= since the former enables debugging, with =dap-mode=, while the latter doesn't.
-#+begin_src emacs-lisp
-  (use-package lsp-mode
-    :init
-    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-    (setq lsp-keymap-prefix "C-c l")
-    :custom
-    ;; Show all documenttion
-    (setq lsp-eldoc-render-all t)
-    :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-           (python-mode . lsp)
-           (js2-mode . lsp)
-           ;; if you want which-key integration
-           (lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp)
-
-  ;; Once I get used to the whole config, uncomment this.
-  (dw/leader-key-def
-    "l"  '(:ignore t :which-key "lsp"))
-  ;;   "ld" 'xref-find-definitions
-  ;;   "lr" 'xref-find-references
-  ;;   "ln" 'lsp-ui-find-next-reference
-  ;;   "lp" 'lsp-ui-find-prev-reference
-  ;;   "ls" 'counsel-imenu
-  ;;   "le" 'lsp-ui-flycheck-list
-  ;;   "lS" 'lsp-ui-sideline-mode
-  ;;   "lX" 'lsp-execute-code-action
-
-  (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode))
-
-  (use-package lsp-treemacs
-    :commands lsp-treemacs-errors-list)
-
-  ;; Consult LSP-mode integration
-  (use-package consult-lsp)
-#+end_src
-
-*** Debug adapter support
-#+begin_src emacs-lisp
-  (use-package dap-mode)
-#+end_src
-
-*** Meta Lisp (empty)
-Here are packages that are useful across different Lisp and Scheme implementations:
-#+begin_src emacs-lisp
-  ;; (use-package lispy
-  ;;   :hook ((emacs-lisp-mode . lispy-mode)
-  ;;          (scheme-mode . lispy-mode)))
-
-  ;; ;; (use-package evil-lispy
-  ;; ;;   :hook ((lispy-mode . evil-lispy-mode)))
-
-  ;; (use-package lispyville
-  ;;   :hook ((lispy-mode . lispyville-mode))
-  ;;   :config
-  ;;   (lispyville-set-key-theme '(operators c-w additional
-  ;;                                         additional-movement slurp/barf-cp
-  ;;                                         prettify)))
-#+end_src
-
-*** Clojure (empty)
-
-*** Common Lisp (empty)
-
-*** Scheme (empty)
 
 *** JavaScript and TypeScript
 Set up =nvm= so that we can manage Node versions
 #+begin_src emacs-lisp
-  (use-package nvm
-    :defer t)
+  ;; (use-package nvm
+  ;;   :defer t)
 #+end_src
 Configure TypeScript and JavaScript language modes. Support for React included. See https://vxlabs.com/2022/06/12/typescript-development-with-emacs-tree-sitter-and-lsp-in-2022/ for more details.
 #+begin_src emacs-lisp
@@ -1285,10 +988,6 @@ Configure TypeScript and JavaScript language modes. Support for React included. 
   (use-package rustic)
 #+end_src
 
-*** C/C++ (empty)
-#+begin_src emacs-lisp
-
-#+end_src
 
 *** Emacs Lisp
 #+begin_src emacs-lisp
