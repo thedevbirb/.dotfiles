@@ -78,5 +78,9 @@
     "hardhat.telemetry": false,
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "vscode-neovim.mouseSelectionStartVisualMode": true,
-    "editor.lineNumbers": "relative"
+    "editor.lineNumbers": "relative",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.autoSave": "afterDelay"
 } 

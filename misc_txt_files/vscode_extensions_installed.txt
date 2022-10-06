@@ -4,10 +4,12 @@ eamodio.gitlens
 esbenp.prettier-vscode
 JuanBlanco.solidity
 meganrogge.template-string-converter
+ms-vscode.vscode-typescript-next
 ms-vsliveshare.vsliveshare
 naumovs.color-highlight
 NomicFoundation.hardhat-solidity
 PKief.material-icon-theme
+Prisma.prisma
 rust-lang.rust-analyzer
 TabNine.tabnine-vscode
 vscode-org-mode.org-mode

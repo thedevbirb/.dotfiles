@@ -1,3 +1,6 @@
+    65 | -y install --disablerepo=* /tmp/akmods.j7ysxUDm/results/kmod-wl-5.19.12-200.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                        | 2022-10-02 11:56 | Install        |    1 EE
+    62 | install fd-find                                                                                                                                                | 2022-09-30 18:42 | Install        |    1   
+    61 | install emacs                                                                                                                                                  | 2022-09-30 18:40 | Install        |    2   
     59 | remove emacs                                                                                                                                                   | 2022-09-28 21:53 | Removed        |    5   
     57 | -y install --disablerepo=* /tmp/akmods.GE8ZVumt/results/kmod-wl-5.19.11-200.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                        | 2022-09-28 12:28 | Install        |    1 EE
     55 | install python3-pip                                                                                                                                            | 2022-09-28 11:47 | I, U           |    5   

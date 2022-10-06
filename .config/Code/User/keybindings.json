@@ -26,7 +26,7 @@
         "command": "-workbench.action.gotoLine"
     },
     {
-        "key": "ctrl+x ctrl+s",
+        "key": "ctrl+s",
         "command": "workbench.action.files.save"
     },
     {
@@ -88,5 +88,15 @@
     {
         "key": "ctrl+shift+pageup",
         "command": "-workbench.action.moveEditorLeftInGroup"
+    },
+    {
+        "key": "ctrl+s",
+        "command": "editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+    },
+    {
+        "key": "ctrl+shift+i",
+        "command": "-editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
     }
 ]

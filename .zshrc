@@ -10,6 +10,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # support for other paths
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.emacs.d/bin:$PATH
 
 
 # Path to your oh-my-zsh installation.
