@@ -1,3 +1,6 @@
+    71 | -y install --disablerepo=* /tmp/akmods.kqjUCwOM/results/kmod-wl-5.19.15-201.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                        | 2022-10-18 09:18 | Install        |    1 E<
+    70 | -y install --disablerepo=* /tmp/akmods.uYFdvkY0/results/kmod-wl-5.19.15-201.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                        | 2022-10-18 09:14 | Install        |    1 >#
+    67 | -y install --disablerepo=* /tmp/akmods.mSnyC4CX/results/kmod-wl-5.19.13-200.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                        | 2022-10-06 23:31 | Install        |    1 EE
     65 | -y install --disablerepo=* /tmp/akmods.j7ysxUDm/results/kmod-wl-5.19.12-200.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                        | 2022-10-02 11:56 | Install        |    1 EE
     62 | install fd-find                                                                                                                                                | 2022-09-30 18:42 | Install        |    1   
     61 | install emacs                                                                                                                                                  | 2022-09-30 18:40 | Install        |    2   

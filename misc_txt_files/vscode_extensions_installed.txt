@@ -11,6 +11,8 @@ NomicFoundation.hardhat-solidity
 PKief.material-icon-theme
 Prisma.prisma
 rust-lang.rust-analyzer
+sldobri.gruvbox-5-stars
+stkb.rewrap
 TabNine.tabnine-vscode
 vscode-org-mode.org-mode
 vscodevim.vim
