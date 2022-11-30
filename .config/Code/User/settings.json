@@ -86,5 +86,14 @@
     "rewrap.wrappingColumn": 80,
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.tokenColorCustomizations": {
+        "textMateRules": []
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 } 

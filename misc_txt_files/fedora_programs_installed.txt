@@ -1,3 +1,10 @@
+    93 | -y install --disablerepo=* /tmp/akmods.4sAedZXz/results/kmod-wl-6.0.9-200.fc36.x86_64-6.30.223.271-45.fc36.x86_64.rpm                                          | 2022-11-23 09:20 | Install        |    1   
+    91 | -y install --disablerepo=* /tmp/akmods.xJq9CJOl/results/kmod-wl-6.0.8-200.fc36.x86_64-6.30.223.271-45.fc36.x86_64.rpm                                          | 2022-11-20 19:52 | Install        |    1   
+    89 | -y install --disablerepo=* /tmp/akmods.PFdcEM2m/results/kmod-wl-6.0.7-200.fc36.x86_64-6.30.223.271-45.fc36.x86_64.rpm                                          | 2022-11-15 09:15 | Install        |    1   
+    84 | -y install --disablerepo=* /tmp/akmods.eISoiL3H/results/kmod-wl-6.0.5-200.fc36.x86_64-6.30.223.271-45.fc36.x86_64.rpm                                          | 2022-11-02 16:50 | Install        |    1   
+    80 | -y install --disablerepo=* /tmp/akmods.KjyDz02w/results/kmod-wl-5.19.16-200.fc36.x86_64-6.30.223.271-45.fc36.x86_64.rpm                                        | 2022-10-28 08:59 | Upgrade        |    1 EE
+    76 | install automake libcurl-devel                                                                                                                                 | 2022-10-21 20:08 | Install        |    1   
+    75 | -y install --disablerepo=* /tmp/akmods.fuNXKgYM/results/kmod-wl-5.19.16-200.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                        | 2022-10-21 20:08 | Install        |    1 EE
     71 | -y install --disablerepo=* /tmp/akmods.kqjUCwOM/results/kmod-wl-5.19.15-201.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                        | 2022-10-18 09:18 | Install        |    1 E<
     70 | -y install --disablerepo=* /tmp/akmods.uYFdvkY0/results/kmod-wl-5.19.15-201.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                        | 2022-10-18 09:14 | Install        |    1 >#
     67 | -y install --disablerepo=* /tmp/akmods.mSnyC4CX/results/kmod-wl-5.19.13-200.fc36.x86_64-6.30.223.271-42.fc36.x86_64.rpm                                        | 2022-10-06 23:31 | Install        |    1 EE

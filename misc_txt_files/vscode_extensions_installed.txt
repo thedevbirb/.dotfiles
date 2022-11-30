@@ -4,6 +4,7 @@ eamodio.gitlens
 esbenp.prettier-vscode
 JuanBlanco.solidity
 meganrogge.template-string-converter
+mikestead.dotenv
 ms-vscode.vscode-typescript-next
 ms-vsliveshare.vsliveshare
 naumovs.color-highlight
