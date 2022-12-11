@@ -1,7 +1,9 @@
 asvetliakov.vscode-neovim
+bradlc.vscode-tailwindcss
 dbaeumer.vscode-eslint
 eamodio.gitlens
 esbenp.prettier-vscode
+formulahendry.auto-rename-tag
 JuanBlanco.solidity
 meganrogge.template-string-converter
 mikestead.dotenv
