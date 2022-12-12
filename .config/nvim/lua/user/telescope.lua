@@ -34,10 +34,11 @@ telescope.setup {
     -- builtin picker. For example, calling telescope.builtin.find_files()
     -- will use the following options.
     find_files = {
+      -- See keymaps.lua
       -- show dotfiles
-      hidden = true,
+      -- hidden = true,
       -- show also gitignored files
-      no_ignore = true,
+      -- no_ignore = true,
     }
   }
 }
