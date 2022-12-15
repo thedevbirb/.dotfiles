@@ -66,9 +66,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Delete and paste to black hole register
 vim.keymap.set("n", "<leader>d", "\"_d")
 
--- Unbind Q
-vim.keymap.set("n", "Q", "<nop>")
-
 -- Replace all occurences of word under cursor, case sensitive and every occasion on line!
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
