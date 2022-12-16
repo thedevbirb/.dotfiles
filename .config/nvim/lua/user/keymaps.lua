@@ -1,5 +1,5 @@
 -- Shorten function name
-local keymap = vim.keymap.set
+-- local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
 
@@ -16,17 +16,11 @@ vim.g.mapleader = " "
 --   command_mode = "c",
 
 -- Normal --
--- Better window navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
-
 -- Go to next/previous error in file: DOES NOT WORK
--- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
--- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+--vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+--vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+--vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+--vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- Resize with arrows
 vim.keymap.set("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -48,8 +42,8 @@ vim.keymap.set("n", "<S-h>", ":bprevious<CR>", opts)
 -- Clear highlights
 vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 
--- Close buffers
-vim.keymap.set("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
+-- Avoid Q
+vim.keymap.set("n", "Q", "<nop>", opts)
 
 -- Copy to clipboard
 vim.keymap.set("n", "<leader>y", '"+y')
@@ -89,36 +83,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- Delete and paste to black hole register
 vim.keymap.set("v", "<leader>d", "\"_d")
 
--- Plugins --
+-- Tmux sessionizer
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
--- NvimTree
-vim.keymap.set("n", "<leader>tt", ":NvimTreeToggle<CR>", opts)
-vim.keymap.set("n", "<leader>tc", ":NvimTreeCollapse<CR>", opts)
-
--- Telescope
-vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-vim.keymap.set("n", "<leader>faf", ":Telescope find_files hidden=true no_ignore=true<CR>", opts) -- find all files
-vim.keymap.set("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
-vim.keymap.set("n", "<leader>fp", ":Telescope projects<CR>", opts)
-vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", opts)
-
--- Git
-vim.keymap.set("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
-
--- Comment
-vim.keymap.set("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
-vim.keymap.set("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
-
--- DAP
-vim.keymap.set("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
-vim.keymap.set("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
-vim.keymap.set("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
-vim.keymap.set("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
-vim.keymap.set("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
-vim.keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
-vim.keymap.set("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
-vim.keymap.set("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
-vim.keymap.set("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
-
--- Lsp
-vim.keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)

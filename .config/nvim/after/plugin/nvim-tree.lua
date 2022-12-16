@@ -12,6 +12,11 @@ if not config_status_ok then
   return
 end
 
+
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<leader>tt", ":NvimTreeToggle<CR>", opts)
+vim.keymap.set("n", "<leader>tc", ":NvimTreeCollapse<CR>", opts)
+
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
