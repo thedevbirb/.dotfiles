@@ -51,6 +51,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use({ "lunarvim/darkplus.nvim" })
+  use({ "rose-pine/neovim" })
 
   use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
   use("nvim-treesitter/playground")
@@ -85,6 +86,10 @@ return packer.startup(function(use)
       { "rafamadriz/friendly-snippets" },
     },
   })
+
+  -- null-ls for formatting
+  use({ "jay-babu/mason-null-ls.nvim", requires = { {  "williamboman/mason.nvim" }, { "jose-elias-alvarez/null-ls.nvim" },},})
+  use({ "jose-elias-alvarez/null-ls.nvim", }) -- for formatters and linters
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

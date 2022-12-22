@@ -15,6 +15,7 @@ lsp.ensure_installed({
   "bashls",
   "solidity",
   "tailwindcss",
+  "prismals",
   "rust_analyzer",
 })
 
@@ -23,6 +24,7 @@ if not status_ok then
   print("cmp not loaded")
   return
 end
+
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
   ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),

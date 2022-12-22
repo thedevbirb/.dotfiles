@@ -12,6 +12,7 @@ telescope.setup {
     selection_caret = " ",
     path_display = { "smart" },
     file_ignore_patterns = { ".git/", "node_modules" },
+    scroll_strategy = "limit", -- do not cycle
 
     mappings = {
       i = {

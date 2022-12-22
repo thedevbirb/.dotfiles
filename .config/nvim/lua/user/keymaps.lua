@@ -73,7 +73,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
--- Better paste
+-- Better yank and paste
 vim.keymap.set("v", "<leader>y", '"+y')
 
 -- Move selected lines
