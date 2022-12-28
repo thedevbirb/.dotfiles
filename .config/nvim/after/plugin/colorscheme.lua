@@ -1,6 +1,5 @@
 -- local colorscheme = "darkplus"
--- local colorscheme = "tokyonight-night"
--- local colorscheme = "gruvbox"
+-- local colorscheme = "tokyonight-moon"
 local colorscheme = "rose-pine"
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)

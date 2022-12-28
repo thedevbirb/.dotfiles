@@ -51,10 +51,9 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use({ "lunarvim/darkplus.nvim" })
+  use({ "folke/tokyonight.nvim" })
   use({ "rose-pine/neovim" })
 
-  use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-  use("nvim-treesitter/playground")
   use("theprimeagen/harpoon")
   use("mbbill/undotree")
   use("tpope/vim-fugitive")
@@ -62,7 +61,7 @@ return packer.startup(function(use)
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
     -- or                            , branch = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' } }
+    requires = { { 'nvim-lua/plenary.nvim' }, { "nvim-telescope/telescope-fzy-native.nvim" } }
   }
 
   use({
@@ -88,8 +87,21 @@ return packer.startup(function(use)
   })
 
   -- null-ls for formatting
-  use({ "jay-babu/mason-null-ls.nvim", requires = { {  "williamboman/mason.nvim" }, { "jose-elias-alvarez/null-ls.nvim" },},})
+  use({ "jay-babu/mason-null-ls.nvim",
+    requires = { { "williamboman/mason.nvim" }, { "jose-elias-alvarez/null-ls.nvim" }, }, })
   use({ "jose-elias-alvarez/null-ls.nvim", }) -- for formatters and linters
+
+  -- TS based plugins
+  use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
+
+  -- autopairs
+  use({ "windwp/nvim-autopairs" })
+
+  -- diagnostics
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
