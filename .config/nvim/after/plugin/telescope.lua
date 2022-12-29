@@ -4,6 +4,7 @@ if not status_ok then
 end
 
 local actions = require "telescope.actions"
+local fb_actions = require "telescope._extensions.file_browser.actions"
 
 telescope.setup {
   defaults = {
@@ -13,6 +14,7 @@ telescope.setup {
     path_display = { "smart" },
     file_ignore_patterns = { ".git/", "node_modules" },
     scroll_strategy = "limit", -- do not cycle
+    initial_mode = "insert",
 
     mappings = {
       n = {
@@ -26,29 +28,28 @@ telescope.setup {
       },
     },
   },
-  -- A 'picker' is a the central UI dedicated to varying use cases
-  --    (finding files, grepping, diagnostics, etc.)
-  pickers = {
-    -- example:
-    -- picker_name = {
-    --    picker_config_key = value,
-    --    ...
-    -- }
-    -- Now the picker_config_key will be applid every time you call this
-    -- builtin picker. For example, calling telescope.builtin.find_files()
-    -- will use the following options.
-    find_files = {
-      -- See keymaps.lua
-      -- show dotfiles
-      -- hidden = true,
-      -- show also gitignored files
-      -- no_ignore = true,
-    }
-  }
+  extensions = {
+    file_browser = {
+      -- theme = "ivy",
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      mappings = {
+        ["i"] = {
+          -- your custom insert mode mappings
+        },
+        ["n"] = {
+          -- your custom normal mode mappings
+          ["h"] = fb_actions.goto_parent_dir,
+          ["l"] = fb_actions.change_cwd,
+        },
+      },
+    },
+  },
 }
 
 -- use compiled sorter to improve performance
 telescope.load_extension("fzy_native")
+telescope.load_extension("file_browser")
 
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 vim.keymap.set("n", "<leader>fg", ":Telescope git_files<CR>", opts)
@@ -57,6 +58,7 @@ vim.keymap.set("n", "<leader>ft", ":Telescope live_grep<CR>", opts) -- find text
 vim.keymap.set("n", "<leader>fw", ":Telescope grep_string word_match=-w<CR>", opts) -- find exact word under cursor
 vim.keymap.set("n", "<leader>fp", ":Telescope projects<CR>", opts)
 vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+vim.keymap.set("n", "<leader>fB", ":Telescope file_browser<CR>", opts)
 vim.keymap.set("n", "<leader>fm", ":Telescope marks<CR>", opts) -- List vim marks and their value
 vim.keymap.set("n", "<leader>fr", ":Telescope registers<CR>", opts) -- List vim marks and their value
 

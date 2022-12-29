@@ -39,3 +39,4 @@ vim.opt.fillchars.eob=" "                       -- show empty lines at the end o
 vim.opt.iskeyword:append("-")                   -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
+vim.opt.autoread = true                         -- Necessary but not sufficient to reload file on external changes 
