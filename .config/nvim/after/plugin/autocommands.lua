@@ -16,7 +16,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end
 })
 
+-- Reload file when changed externally
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
   command = "if mode() != 'c' | checktime | endif", -- I don't know how this works
   pattern = { "*" },
 })
+
+
