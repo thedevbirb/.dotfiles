@@ -1,0 +1,10 @@
+theme = "dark_plus"
+
+[editor]
+line-number = "relative"
+scrolloff = 8
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"

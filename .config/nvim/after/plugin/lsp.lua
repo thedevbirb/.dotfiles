@@ -8,7 +8,6 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
   "tsserver",
-  "sumneko_lua",
   "cssls",
   "html",
   "jsonls",

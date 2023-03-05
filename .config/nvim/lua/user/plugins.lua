@@ -16,12 +16,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
+--vim.cmd([[
+--  augroup packer_user_config
+--    autocmd!
+--    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--  augroup end
+--]])
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
@@ -43,16 +43,24 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-  -- My plugins here
   use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
   use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
+
+  -- Miscellaneous
   use({ "kyazdani42/nvim-web-devicons", commit = "563f3635c2d8a7be7933b9e547f7c178ba0d4352" }) -- icons support
   use({ "kyazdani42/nvim-tree.lua", commit = "7282f7de8aedf861fe0162a559fc2b214383c51c" }) -- nvim tree file explorer
 
   -- Colorschemes
   use({ "lunarvim/darkplus.nvim" })
+  use({
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    config = function()
+      require("rose-pine").setup()
+      vim.cmd('colorscheme rose-pine')
+    end
+  })
   use({ "folke/tokyonight.nvim" })
-  use({ "rose-pine/neovim" })
 
   use("theprimeagen/harpoon")
   use("mbbill/undotree")
@@ -67,6 +75,7 @@ return packer.startup(function(use)
     "nvim-telescope/telescope-file-browser.nvim", requires = { { "nvim-telescope/telescope.nvim" } }
   }
 
+  -- LSP
   use({
     "VonHeikemen/lsp-zero.nvim",
     requires = {
@@ -90,15 +99,27 @@ return packer.startup(function(use)
   })
 
   -- null-ls for formatting
-  use({ "jay-babu/mason-null-ls.nvim",
-    requires = { { "williamboman/mason.nvim" }, { "jose-elias-alvarez/null-ls.nvim" }, }, })
-  use({ "jose-elias-alvarez/null-ls.nvim", }) -- for formatters and linters
+  use({
+    "jay-babu/mason-null-ls.nvim",
+    requires = { { "williamboman/mason.nvim" }, { "jose-elias-alvarez/null-ls.nvim" }, },
+  })
 
   -- TS based plugins
   use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 
   -- autopairs
   use({ "windwp/nvim-autopairs" })
+
+  -- autosave
+  use({
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("auto-save").setup {
+        -- your config goes here
+        -- or just leave it empty :)
+      }
+    end,
+  })
 
   -- diagnostics
   use {
