@@ -3,8 +3,24 @@ theme = "dark_plus"
 [editor]
 line-number = "relative"
 scrolloff = 8
+auto-save = true
 
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
 select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[keys.insert]
+# does not work very well
+"esc" = ["normal_mode", ":write-all"]
+
+[keys.normal]
+"ret" = ["open_below", "normal_mode"] # Maps the enter key to open_below then re-enter normal mode

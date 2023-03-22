@@ -44,14 +44,13 @@ packer.init({
 -- Install your plugins here
 return packer.startup(function(use)
   use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
-  use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
+  use({ "nvim-lua/plenary.nvim" })  -- Useful lua functions used by lots of plugins
 
   -- Miscellaneous
   use({ "kyazdani42/nvim-web-devicons", commit = "563f3635c2d8a7be7933b9e547f7c178ba0d4352" }) -- icons support
-  use({ "kyazdani42/nvim-tree.lua", commit = "7282f7de8aedf861fe0162a559fc2b214383c51c" }) -- nvim tree file explorer
+  use({ "kyazdani42/nvim-tree.lua", commit = "7282f7de8aedf861fe0162a559fc2b214383c51c" })     -- nvim tree file explorer
 
   -- Colorschemes
-  use({ "lunarvim/darkplus.nvim" })
   use({
     'rose-pine/neovim',
     as = 'rose-pine',
@@ -60,7 +59,7 @@ return packer.startup(function(use)
       vim.cmd('colorscheme rose-pine')
     end
   })
-  use({ "folke/tokyonight.nvim" })
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   use("theprimeagen/harpoon")
   use("mbbill/undotree")
