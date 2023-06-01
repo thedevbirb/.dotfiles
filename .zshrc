@@ -10,8 +10,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # support for other paths
 export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.emacs.d/bin:$PATH
-export PATH=$PATH:~/.roswell/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"

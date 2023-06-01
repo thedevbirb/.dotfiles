@@ -51,14 +51,6 @@ return packer.startup(function(use)
   use({ "kyazdani42/nvim-tree.lua", commit = "7282f7de8aedf861fe0162a559fc2b214383c51c" })     -- nvim tree file explorer
 
   -- Colorschemes
-  use({
-    'rose-pine/neovim',
-    as = 'rose-pine',
-    config = function()
-      require("rose-pine").setup()
-      vim.cmd('colorscheme rose-pine')
-    end
-  })
   use { "catppuccin/nvim", as = "catppuccin" }
 
   use("theprimeagen/harpoon")
