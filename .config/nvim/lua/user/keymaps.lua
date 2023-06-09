@@ -32,6 +32,11 @@ vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
+-- Go down/up with visual lines, which means soft-wrapped lines are counted
+-- as well
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")
+
 -- Join lines but do not move cursor
 vim.keymap.set("n", "J", "mzJ`z")
 
@@ -85,4 +90,3 @@ vim.keymap.set("v", "<leader>d", "\"_d")
 
 -- Tmux sessionizer
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
