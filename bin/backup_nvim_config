@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+echo "Moving all relevant files into .bak files"
+# Show all commands we're running
+set -x
+
+rm -rf ~/.config/nvim.bak && mv ~/.config/nvim ~/.config/nvim.bak
+
+rm -rf ~/.local/share/nvim.bak && mv ~/.local/share/nvim ~/.local/share/nvim.bak
+
+rm -rf ~/.local/state/nvim.bak && mv ~/.local/state/nvim ~/.local/state/nvim.bak
+
+rm -rf ~/.cache/nvim.bak && mv ~/.cache/nvim ~/.cache/nvim.bak
+
+# disable previous option
+set +x
+
+echo "Done!"

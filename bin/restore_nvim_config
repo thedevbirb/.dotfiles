@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# -d checks if directory exists
+if [ -d "$HOME/.config/nvim.bak" ] && [ -d "$HOME/.local/share/nvim.bak" ] && [ -d "$HOME/.local/state/nvim.bak" ]; then
+  echo "Backup folders exists. Proceeding..."
+else
+  # Redirect (>) the output to stderr (file descriptor 2)
+  echo "Missing some backup folders. Aborting" >&2
+  exit 1
+fi
+
+echo "Removing current nvim folders..."
+rm -rf ~/.config/nvim
+rm -rf ~/.local/share/nvim
+rm -rf ~/.local/state/nvim
+
+echo "Done!"
+
+echo "Moving .bak folders back..."
+mv ~/.config/nvim.bak ~/.config/nvim
+mv ~/.local/share/nvim.bak ~/.local/share/nvim
+mv ~/.local/state/nvim.bak ~/.local/state/nvim
+
+echo "Done! You can now reopen neovim and continue with where you left!"
+exit 0

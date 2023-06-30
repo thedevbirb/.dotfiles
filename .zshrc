@@ -147,3 +147,4 @@ VI_MODE_SET_CURSOR=true
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH="$PATH:/home/lorenzo/.foundry/bin"
+export GOPATH=$HOME/go
