@@ -21,5 +21,5 @@ mv ~/.config/nvim.bak ~/.config/nvim
 mv ~/.local/share/nvim.bak ~/.local/share/nvim
 mv ~/.local/state/nvim.bak ~/.local/state/nvim
 
-echo "Done! You can now reopen neovim and continue with where you left!"
+echo "Done! You can now reopen neovim and continue where you left!"
 exit 0
