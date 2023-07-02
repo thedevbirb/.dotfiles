@@ -18,6 +18,10 @@ export ZSH="$HOME/.oh-my-zsh"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
+# Launch NVIM with openai api key
+OPENAI_API_KEY=$(cat ~/.dotfiles/.env | rg 'OPENAI_API_KEY=(.*)' -or  '$1')
+alias nvim="OPENAI_API_KEY=$OPENAI_API_KEY nvim"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
