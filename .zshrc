@@ -5,11 +5,16 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+source "$HOME/.oh-my-zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # support for other paths
 export PATH=$HOME/.local/bin:$PATH
+
+# it contains npm global packages also
+export PATH=/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -17,6 +22,15 @@ export ZSH="$HOME/.oh-my-zsh"
 # Set neovim as default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
+# fuzzy find history
+# Executes chosen history command
+# fzf --tac reverse the order, from most recent
+# sed ... remove the first word
+# finally, pipe to shell
+function fzf_history() {
+  history | fzf --tac | sed -e "s/ *[^ ]* //" | zsh
+}
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -148,3 +162,7 @@ VI_MODE_SET_CURSOR=true
 
 export PATH="$PATH:/home/lorenzo/.foundry/bin"
 export GOPATH=$HOME/go
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

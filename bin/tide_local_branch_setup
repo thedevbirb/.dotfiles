@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# run this command inside tide-protocol.git/{branch_name}
+cd frontend && yarn install && cp ../../main/frontend/.env.me -t .
+npx dotenv-vault pull local
+npx dotenv-vault pull development
+npx dotenv-vault pull staging
+npx dotenv-vault pull production
+cd ../
+cd backend && yarn install && cp ../../main/backend/.env.me -t .
+npx dotenv-vault pull local
+npx dotenv-vault pull development
+npx dotenv-vault pull staging
+npx dotenv-vault pull production
+cd ../

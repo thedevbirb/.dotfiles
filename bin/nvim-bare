@@ -1,0 +1,1 @@
+nvim --clean -u ~/.config/nvim_bare/init.lua
