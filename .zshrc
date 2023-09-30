@@ -29,7 +29,7 @@ export EDITOR="$VISUAL"
 # sed ... remove the first word
 # finally, pipe to shell
 function fzf_history() {
-  history | fzf --tac | sed -e "s/ *[^ ]* //" | zsh
+  tac ~/.zsh_history | fzf --no-sort | sed -e "s/:d*:0;//" | tee -a ~/.zsh_history | sh
 }
 
 # Set name of the theme to load --- if set to "random", it will

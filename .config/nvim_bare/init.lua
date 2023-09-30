@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(plugin_site .. "plenary.nvim")
 vim.opt.rtp:prepend(plugin_site .. "telescope.nvim")
 vim.opt.rtp:prepend(plugin_site .. "fzf-lua")
 vim.opt.rtp:prepend(plugin_site .. "nvim-treesitter")
+vim.opt.rtp:prepend(plugin_site .. "nvim-lspconfig")
 
 require("thedevbirb")
 

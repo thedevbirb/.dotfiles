@@ -36,6 +36,9 @@ vim.keymap.set("n", "<leader>P", '"+P')
 vim.keymap.set({ "x", "v" }, "<leader>p", [["_dp]])
 vim.keymap.set({ "x", "v" }, "<leader>P", [["_dP]])
 
+-- faster quit
+vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>");
+
 -- yank to system clipboard
 vim.keymap.set({ "n", "v", "x" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])

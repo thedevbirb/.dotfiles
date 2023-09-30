@@ -1,1 +1,2 @@
-lua/bin/lua-language-server-3.7.0
+#!/bin/bash
+exec "~/.local/share/nvim/bare/lua-language-server-3.7.0/bin/lua-language-server" "$@"
