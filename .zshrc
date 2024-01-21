@@ -16,6 +16,8 @@ export PATH=$HOME/.local/bin:$PATH
 # it contains npm global packages also
 export PATH=/usr/local/bin:$PATH
 
+export PATH="/home/lorenzo/.local/share/solana/install/active_release/bin:$PATH"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -166,3 +168,5 @@ export GOPATH=$HOME/go
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$PATH:/home/lorenzo/.huff/bin"

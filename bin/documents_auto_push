@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Navigate to your repository directory
+cd ~/Documents/md_documents
+
+# Add all changes
+git add .
+
+# Commit with the current timestamp
+git commit -m "Auto-commit on $(date)"
+
+# Push the commit to a remote repository
+git push origin main
