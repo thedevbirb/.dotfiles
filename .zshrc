@@ -119,6 +119,8 @@ source $ZSH/oh-my-zsh.sh
 
 # add to PATH Rust-made binaries
 export PATH=/home/lorenzo/.cargo/bin:$PATH
+# add to PATH Go-made binaries
+export PATH=/home/lorenzo/go/bin:$PATH
 
 
 # You may need to manually set your language environment
