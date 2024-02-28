@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Clone and set up repository to automatically fetch all branches
+REPO_URL="$1"
+REPO_DIR="$2"
+
+if [ -z "$REPO_URL" ] || [ -z "$REPO_DIR" ]; then
+	echo "Usage: $0 <repository-url> <target-directory>"
+	exit 1
+fi
+
+git clone --bare "$REPO_URL" "$REPO_DIR" &&
+	cd "$REPO_DIR" &&
+	git config remote.origin.fetch "+refs/heads/*:refs/heads/*" &&
+	git fetch origin
+
+echo "Repository cloned and configured to fetch all branches."
