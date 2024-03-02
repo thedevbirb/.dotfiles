@@ -5,11 +5,11 @@ if [[ $# -eq 1 ]]; then
 	selected=$1
 else
 	selected=$( (
-		find ~/ ~/personal ~/oss ~/.dotfiles ~/Documents/ -mindepth 0 -maxdepth 1 -type d
+		find ~/personal ~/oss ~/.dotfiles ~/Documents/ -mindepth 0 -maxdepth 1 -type d
 		# git worktrees
-		find ~ -mindepth 0 -maxdepth 4 -type d -regex ".*personal.*\.git$\|.*personal.*\.git\/.*"
-		find ~ -mindepth 0 -maxdepth 4 -type d -regex ".*oss.*\.git$\|.*oss.*\.git\/.*"
-		find ~ -mindepth 0 -maxdepth 4 -type d -regex ".*work.*\.git$\|.*work.*\.git\/.*"
+		find ~/personal -mindepth 0 -maxdepth 3 -type d -regex ".*\.git$"
+		find ~/oss -mindepth 0 -maxdepth 3 -type d -regex ".*\.git$"
+		find ~/work -mindepth 0 -maxdepth 3 -type d -regex ".*\.git$"
 	) | fzf)
 fi
 
