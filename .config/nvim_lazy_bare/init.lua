@@ -29,15 +29,6 @@ require("lazy").setup({
     end,
   },
   { "nvim-lua/plenary.nvim" },
-  {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
-  init = function()
-    vim.o.timeout = true
-    vim.o.timeoutlen = 300
-  end,
-  opts = {}
-  },
   { -- https://www.lazyvim.org/plugins/treesitter for more choices
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -68,9 +59,6 @@ require("lazy").setup({
         "yaml",
       },
     },
-  },
-  {
-	"ibhagwan/fzf-lua"
   },
   {
 	  "neovim/nvim-lspconfig"

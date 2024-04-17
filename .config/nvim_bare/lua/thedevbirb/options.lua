@@ -46,26 +46,22 @@ opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 
 if vim.fn.has("nvim-0.9.0") == 1 then
-  opt.splitkeep = "screen"
-  opt.shortmess:append({ C = true })
+	opt.splitkeep = "screen"
+	opt.shortmess:append({ C = true })
 end
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
-
 --
 -- personal settings
 --
 
--- I hate dealing with swap files
-vim.opt.swapfile = false
-
+vim.opt.swapfile = true
 
 vim.g.netrw_banner = 1
 vim.g.netrw_liststyle = 3
 vim.g.netrw_winsize = 22
-
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true

@@ -5,11 +5,12 @@ if [[ $# -eq 1 ]]; then
 	selected=$1
 else
 	selected=$( (
+		find ~ ~/nixos-config/ -mindepth 0 -maxdepth 0 -type d
 		find ~/personal ~/oss ~/.dotfiles ~/Documents/ -mindepth 0 -maxdepth 1 -type d
-		# git worktrees
-		find ~/personal -mindepth 0 -maxdepth 3 -type d -regex ".*\.git$"
-		find ~/oss -mindepth 0 -maxdepth 3 -type d -regex ".*\.git$"
-		find ~/work -mindepth 0 -maxdepth 3 -type d -regex ".*\.git$"
+
+		find ~/personal -mindepth 0 -maxdepth 1 -type d
+		find ~/oss -mindepth 0 -maxdepth 1 -type d
+		find ~/work -mindepth 0 -maxdepth 2 -type d
 	) | fzf)
 fi
 
