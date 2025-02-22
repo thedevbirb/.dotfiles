@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Clone and set up repository to automatically fetch all branches
+REPO_OWNER="$1"
+REPO_DIR="$2"
+
+GITHUB_REMOTE="https://github.com/${REPO_OWNER}/${REPO_DIR}"
+
+if [ -z "$REPO_OWNER" ] || [ -z "$REPO_DIR" ]; then
+	echo "Usage: $0 <repository-owner> <target-directory>"
+	exit 1
+fi
+
+# Note: to lowercase assumes zsh
+# Ref: https://scriptingosx.com/2019/12/upper-or-lower-casing-strings-in-bash-and-zsh/
+git clone "${GITHUB_REMOTE}" "${REPO_DIR:l}_${REPO_OWNER:l}"

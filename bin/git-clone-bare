@@ -1,17 +1,24 @@
 #!/bin/bash
 
 # Clone and set up repository to automatically fetch all branches
-REPO_URL="$1"
+REPO_OWNER="$1"
 REPO_DIR="$2"
 
-if [ -z "$REPO_URL" ] || [ -z "$REPO_DIR" ]; then
-	echo "Usage: $0 <repository-url> <target-directory>"
+GITHUB_REMOTE="https://github.com/${REPO_OWNER}/${REPO_DIR}"
+
+if [ -z "$REPO_OWNER" ] || [ -z "$REPO_DIR" ]; then
+	echo "Usage: $0 <repository-owner> <target-directory>"
 	exit 1
 fi
 
-git clone --bare "$REPO_URL" "$REPO_DIR" &&
-	cd "$REPO_DIR" &&
-	git config remote.origin.fetch "+refs/heads/*:refs/heads/*" &&
-	git fetch origin
+git clone --bare "${GITHUB_REMOTE}"
+cd "${REPO_DIR}.git"
+git config remote.origin.fetch "+refs/heads/*:refs/heads/*"
+git fetch origin
+
+# Add the default GitHub branch into a worktree
+GITHUB_HEAD=$(git remote show origin | grep "HEAD branch" | cut -d ":" -f 2 | xargs)
+git worktree add "${GITHUB_HEAD}"
 
 echo "Repository cloned and configured to fetch all branches."
+echo "Added default branch into a worktree."
