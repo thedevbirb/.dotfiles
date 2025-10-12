@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Exit if not macOS
+if [[ "$(uname)" != "Darwin" ]]; then
+  echo "This script only works on macOS."
+  exit 1
+fi
+
+# Usage: notify ./yourscript.sh [args...]
+
+# Run the provided script
+"$@"
+
+# Capture the exit code
+exit_code=$?
+
+# Play system sound
+afplay /System/Library/Sounds/Hero.aiff
+
+# Optionally show a desktop alert too
+# osascript -e 'display alert "Task Done" message "Script '"$@"' finished with exit code '"$exit_code"'"'
+
+# Exit with the same code as the wrapped script
+exit $exit_code
