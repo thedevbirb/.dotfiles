@@ -20,4 +20,9 @@ vim.opt.rtp:prepend(lazypath)
 --   { "nvim-treesitter/nvim-treesitter" },
 -- })
 -- ```
-require("lazy").setup({})
+require("lazy").setup({
+	{
+		"ibhagwan/fzf-lua",
+		cmd = "FzfLua",
+	},
+})
