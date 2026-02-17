@@ -9,6 +9,34 @@ local sysname = vim.loop.os_uname().sysname
 -- Make sure that primary commands and utils like 'man' are from the system.
 vim.env.PATH = '/usr/bin:' .. vim.env.PATH
 
+---------------- GLOBALS --------------------------------------------------------------------------
+
+vim.g.netrw_liststyle = 3
+vim.g.netrw_winsize = 28
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- Orbstack workaround for clipboard: https://github.com/orbstack/orbstack/issues/1799#issuecomment-2719123106
+if vim.system({ "uname", "-a" }, { text = true }):wait().stdout:lower():find("orbstack") then
+	vim.g.clipboard = {
+	  name = 'myClipboard',
+	  copy = {
+	    ['+'] = { 'pbcopy' },
+	    ['*'] = { 'pbcopy' },
+	  },
+	  paste = {
+	    ['+'] = { 'pbpaste' },
+	    ['*'] = { 'pbpaste' },
+	  },
+	  cache_enabled = 1,
+	}
+end
+
+---------------- alias ---------------------------------------------------------------------------
+
+local opt = vim.opt
+
 ---------------- THEME --------------------------------------------------------
 
 
@@ -25,7 +53,7 @@ local function macos_appearance()
 end
 
 local uv = vim.uv or vim.loop
-if uv and uv.os_uname().sysname == "Darwin" then
+if sysname == "Darwin" then
 	vim.opt.background = macos_appearance()
 
 	-- Optional: re-sync if you switch themes while Neovim is open
@@ -40,6 +68,19 @@ if uv and uv.os_uname().sysname == "Darwin" then
 	})
 end
 
+if sysname == "Linux" then
+	vim.opt.background = "dark"
+
+	-- Switch theme quickly, useful when no DE is available. doesnt' work
+	vim.keymap.set("n", "<leader>bg", function ()
+		if opt.background:get() == "dark" then 
+			opt.background = "light"
+		else
+			opt.background = "dark"
+		end
+	end)
+end
+
 ---------------- OPTIONS ------------------------------------------------------
 
 -- A good reference to check out from time to time is
@@ -50,8 +91,6 @@ vim.g.netrw_winsize = 28
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-
-local opt = vim.opt
 
 -- Keep cursor centered when scrolling.
 opt.scrolloff = 999
@@ -90,7 +129,10 @@ opt.exrc = true
 -- Paired with the option above, disable some stuff to prevent running arbitrary scripts.
 opt.secure = true
 
----------------- KEYMAPS ----------------
+-- Show always popup menu, but don't auto-select the first result unless there is only one option.
+opt.completeopt = { "menu", "noselect" }
+
+---------------- KEYMAPS --------------------------------------------------------------------------
 
 -- Modes
 --   normal_mode = "n",
@@ -99,6 +141,17 @@ opt.secure = true
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
+
+-- Switch theme quickly, useful when no DE is available. doesnt' work
+-- vim.keymap.set("n", "<leader>bg", function ()
+-- 		if opt.background:get() == "dark" then 
+-- 			opt.background:remove()
+-- 			opt.background:set("light") 
+-- 		else
+-- 			opt.background:remove()
+-- 			opt.background:set("dark")
+-- 		end
+-- 	end)
 
 -- better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", 
@@ -117,20 +170,24 @@ vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>",
 	{ desc = "Increase Window Width" })
 
 vim.keymap.set("n", "<leader>e", "<cmd>Lex<cr>")
-vim.keymap.set("n", "<leader>p", "\"+p")
-vim.keymap.set("n", "<leader>P", "\"+P")
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<cr>")
+
+---- Yank and Paste
+
+vim.keymap.set("n", "<leader>p", "\"+p")
+vim.keymap.set("n", "<leader>P", "\"+P")
 vim.keymap.set({"n", "x", "v"}, "<leader>y", "\"+y")
 vim.keymap.set({"n", "x", "v"}, "<leader>Y", "\"+Y")
 vim.keymap.set("n", "<leader>term", "<C-w>s<C-w>j<cmd>term<cr>A");
+-- Copy relative file path to clipboard
+vim.keymap.set("n", "<leader>cp", ":lua vim.fn.setreg('+', vim.fn.getreg('%'))<cr>");
 
+-- Find
 vim.keymap.set("n", "<leader>ff", ":find ");
 vim.keymap.set("n", "<leader>fb", ":buffer ");
 
--- Copy relative file path to clipboard
-vim.keymap.set("n", "<leader>cp", 
-	":lua vim.fn.setreg('+', vim.fn.getreg('%'))<cr>");
+-- Search
 
 vim.keymap.set(
 	"n", "<leader>sw", "\"zyiw:grep <C-r>z <cr> | :copen 20<cr>", 
@@ -151,10 +208,10 @@ vim.keymap.set(
 	"<cmd>e ~/.config/nvim_simple/init.lua<cr>"
 );
 
--- Enter in terminal mode quickly.
+-- Enter in terminal mode quickly. todo redundant with term
 vim.keymap.set('n', '<leader>tt', function()
 		vim.cmd('hsplit | terminal')
-	end, { desc = 'Open terminal (vertical split)' })
+	end, { desc = 'Open terminal (horizontal split)' })
 
 
 
@@ -351,6 +408,223 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 
 ---------------------- C DEVELOPMENT --------------------------------------------------------------
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "c", "lua" },
+	callback = function()
+		vim.keymap.set(
+			"n",
+			"<leader>sm",
+			[[:grep "^\#define <C-r><C-w>"<cr>]],
+			{ desc = "Search for macro declarations (#define) for the work under cursor" }
+
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>sf",
+			[[:grep "^<C-r><C-w>\("<cr>]],
+			{ desc = "Search for function definition/declaration for the work under cursor. Assumes BSD-style" }
+
+		)
+	end
+})
+
+-------------------- SIMPLE PLUGINS ---------------------------------------------------------------
+
+
+-- tree-browser.lua — minimal tree(1) file browser for Neovim
+-- Usage: :Tree to toggle | <CR> open file | q close | R refresh
+
+if vim.fn.executable("tree") == 1 then
+	-- Plugin-wide global variables containing the current buffer, window and paths.
+	local buf, win, paths
+
+	-- tree(1) flags without long equivalents: -n (no color), -f (full path),
+	-- -i (no indentation lines), -I (exclude pattern), -a (all files, even dotfiles).
+	local flags_common = "--dirsfirst --gitignore -I .git --noreport -a "
+	local tree_base = "tree -n " .. flags_common
+	local tree_flat = "tree -nfi " .. flags_common
+
+	-- Refresh the current file browser view.
+	local function refresh()
+		local cwd = vim.fn.shellescape(vim.fn.getcwd())
+		-- Two tree calls with identical ordering: the pretty one for display, the
+		-- flat one (-fi) for path lookup. 
+		-- IMPORTANT: Both produce the same number of lines so cursor line number indexes
+		-- directly into the paths table.
+		local pretty = vim.fn.systemlist(tree_base .. cwd)
+		paths = vim.fn.systemlist(tree_flat .. cwd)
+
+		-- Modify the buffer from start to the end with the pretty tree.
+		vim.bo[buf].modifiable = true
+		vim.api.nvim_buf_set_lines(buf, 0, -1, false, pretty)
+		vim.bo[buf].modifiable = false
+	end
+
+	-- Use cursor line number to index into the flat paths table, skip directories,
+	-- then jump to the previous window (wincmd p) and open the file there.
+	local function open_file()
+		local path = paths[vim.api.nvim_win_get_cursor(0)[1]]
+		if not path or vim.fn.isdirectory(path) == 1 then return end
+		vim.cmd("wincmd p | edit " .. vim.fn.fnameescape(path))
+	end
+
+	local function toggle()
+		if win and vim.api.nvim_win_is_valid(win) then
+			-- Refuse to close the last window (E444); just nil out the handle.
+			if #vim.api.nvim_list_wins() > 1 then
+				vim.api.nvim_win_close(win, true)
+			end
+			win = nil
+			return
+		end
+
+		if not buf or not vim.api.nvim_buf_is_valid(buf) then
+			buf = vim.api.nvim_create_buf(false, true)
+			vim.bo[buf].filetype = "tree"
+			vim.keymap.set("n", "<CR>", open_file, { buffer = buf })
+			vim.keymap.set("n", "q", toggle, { buffer = buf })
+			vim.keymap.set("n", "R", refresh, { buffer = buf })
+		end
+
+		-- Create a vsplit with ~30% size.
+		vim.cmd("topleft vsplit")
+		vim.cmd("vertical resize " .. math.floor(vim.o.columns * 0.3))
+
+		win = vim.api.nvim_get_current_win()
+		vim.api.nvim_win_set_buf(win, buf)
+
+		vim.wo[win].number = false
+		vim.wo[win].relativenumber = false
+		vim.wo[win].signcolumn = "no"
+		vim.wo[win].cursorline = true
+		vim.wo[win].winfixwidth = true
+		vim.wo[win].wrap = false
+
+		refresh()
+	end
+
+	vim.api.nvim_create_user_command("Tree", toggle, {})
+
+	vim.api.nvim_create_autocmd({ "BufWritePost", "FocusGained" }, {
+		callback = function()
+			if buf and vim.api.nvim_buf_is_valid(buf) and 
+			   win and vim.api.nvim_win_is_valid(win) then
+				refresh()
+			end
+		end,
+	})
+	vim.keymap.set("n", "<leader>e", "<cmd>Tree<cr>")
+end
+
+-- fzf-files.lua — minimal fzf file picker for Neovim
+-- Usage: :FzfFiles to pick and open a file
+if vim.fn.executable("fzf") == 1 then
+	-- Architecture:
+	--
+	-- The plugin opens a short bottom split containing a Neovim :terminal running
+	-- fzf.  Because fzf is a TUI program it needs a real TTY, so we cannot simply
+	-- call vim.fn.system(); instead we use vim.fn.termopen() which attaches fzf to
+	-- a terminal buffer the user can interact with normally.
+	--
+	-- fzf writes its selection to stdout, which we redirect into a temporary file
+	-- (fzf > tmpfile).  When fzf exits, the on_exit callback fires: we read the
+	-- temp file to recover the chosen path, tear down the terminal buffer, and
+	-- open the file in the window the user was in before invoking :FzfFiles.
+	--
+	-- For .gitignore-aware file listing we try to pipe fd or rg into fzf as a
+	-- source command.  Both respect .gitignore by default.  If neither is
+	-- installed, fzf falls back to its built-in find(1) source which does not
+	-- filter by .gitignore.
+	--
+	--   [fd --type file | ] fzf > /tmp/nvimXXX
+	--         ^                       ^
+	--   optional source          temp file holds the picked path
+	--         │                       │
+	--         └──── terminal buffer ──┘
+	--                    │
+	--              on_exit callback
+	--                    │
+	--         ┌──────────┴──────────┐
+	--         │  read tmp -> path   │
+	--         │  delete term buf    │
+	--         │  open path in prev  │
+	--         │  window             │
+	--         └─────────────────────┘
+
+	-- Pick the best available file lister.  fd and rg both honour .gitignore out
+	-- of the box.  The result is nil when neither is installed, in which case fzf
+	-- uses its built-in find(1) walker.  Lua's `and/or` short-circuit: the first
+	-- truthy value wins.
+	local src = (vim.fn.executable("fd") == 1 and "fd --type file")
+		or (vim.fn.executable("rg") == 1 and "rg --files")
+
+	local function fzf_files()
+		-- Create a temp file that fzf will write its selection into via shell
+		-- redirection (>).  We read it back after fzf exits.
+		local tmp = vim.fn.tempname()
+
+		-- Build the shell command.  If a source is available, pipe it into fzf;
+		-- otherwise let fzf use its default source.  The selection is redirected
+		-- into the temp file so we can retrieve it after the process ends.
+		local cmd = (src and (src .. " | ") or "") .. "fzf > " .. vim.fn.shellescape(tmp)
+
+		-- Remember which window the user is in so we can open the picked file
+		-- there after fzf exits.
+		local prev_win = vim.api.nvim_get_current_win()
+
+		-- Open a small horizontal split at the very bottom for the fzf terminal.
+		-- 15 lines is enough for fzf to show a reasonable number of candidates.
+		vim.cmd("botright 15new")
+		local term_buf = vim.api.nvim_get_current_buf()
+
+		-- Start fzf inside the terminal buffer.  termopen() connects the buffer
+		-- to the child process's PTY so the user can type, scroll, and select.
+		-- The on_exit callback fires once fzf terminates (selection or cancel).
+		vim.fn.termopen(cmd, {
+			on_exit = function(_, code)
+				-- vim.schedule defers into the main loop because on_exit fires in
+				-- a luv callback context where most Neovim API calls are forbidden.
+				vim.schedule(function()
+					-- Tear down the terminal buffer unconditionally.  pcall guards
+					-- against the buffer already being gone (e.g. user ran :q).
+					pcall(vim.api.nvim_buf_delete, term_buf, { force = true })
+
+					-- Exit code 0 means the user picked a file; 1 means no match,
+					-- 2 means error, 130 means cancelled (Ctrl-C / Esc).
+					if code == 0 then
+						-- Read the result in the temporary file.
+						local file = io.open(tmp)
+						if file then
+							-- Read exactly one line: the selected file path.
+							local pick = file:read("*l")
+							file:close()
+							-- Only proceed if we got a non-empty path and the
+							-- original window still exists (user may have closed
+							-- it while fzf was open).
+							if pick and pick ~= "" and vim.api.nvim_win_is_valid(prev_win) then
+								vim.api.nvim_set_current_win(prev_win)
+								vim.cmd("edit " .. vim.fn.fnameescape(pick))
+							end
+						end
+					end
+
+					-- Clean up the temp file regardless of outcome.
+					os.remove(tmp)
+				end)
+			end,
+		})
+
+		-- Enter terminal insert mode so keystrokes go straight to fzf instead of
+		-- being interpreted as Neovim normal-mode commands.
+		vim.cmd("startinsert")
+	end
+
+	-- Register the user command.  No arguments, no completion — just run it.
+	vim.api.nvim_create_user_command("FzfFiles", fzf_files, {})
+	vim.keymap.set("n", "<leader>ff", fzf_files, { desc =  "find files" })
+end
+
 
 -- TODOs
 -- [ ] :find doesn't respect .gitignore
