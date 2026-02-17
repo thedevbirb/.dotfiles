@@ -44,6 +44,7 @@ return {
 		action = wezterm.action.EmitEvent("toggle-opacity"),
 	} },
 	font = wezterm.font_with_fallback({
+		-- { family = "Akceler A Demo", weight = "Bold" },
 		"Berkeley Mono",
 		"JetBrains Mono",
 	}),
