@@ -19,7 +19,20 @@ if [[ -z $selected ]]; then
   exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
+# Check if selected directory is a git worktree
+if [[ -f "$selected/.git" ]]; then
+  # It's a worktree - .git is a file pointing to the main repo
+  parent_name=$(basename "$(dirname "$selected")")
+  branch_name=$(git -C "$selected" rev-parse --abbrev-ref HEAD 2>/dev/null)
+  if [[ -n $branch_name ]]; then
+    selected_name=$(echo "${parent_name}__${branch_name}" | tr . _)
+  else
+    selected_name=$(basename "$selected" | tr . _)
+  fi
+else
+  selected_name=$(basename "$selected" | tr . _)
+fi
+
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
